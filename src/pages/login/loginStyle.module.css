@@ -1,0 +1,45 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.containerSection{
+    width: 100%;
+}
+
+.containerArticle{
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.figureContainer{
+  width: 45%;
+  height: 600px;
+  background-color: aqua;
+}
+.contianerForm{
+  width: 45%;
+}
+
+.formLogin{
+  width: 100%;
+}
+
+.formLogin .logoForm{
+  width: 100%;
+  height: 150px;
+  padding: 1rem 0;
+  display: flex;
+  border-bottom: 1px solid whitesmoke;
+ 
+}
+
+.formLogin .logoForm img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
