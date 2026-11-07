@@ -12,7 +12,7 @@
     max-width: 1440px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .figureContainer{
@@ -20,8 +20,15 @@
   height: 600px;
   background-color: aqua;
 }
+
+.figureContainer img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
 .contianerForm{
-  width: 45%;
+  width: 55%;
 }
 
 .formLogin{
@@ -42,4 +49,50 @@
   height: 100%;
   object-fit: contain;
   object-position: 50% 50%;
+}
+
+.gruposTextForm{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gruposTextForm h2{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #b48e14;
+  letter-spacing: 2px;
+  padding: 0.8rem;
+}
+
+.gruposTextForm input{
+  width: 50%;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  border: 1px solid #b48e14;
+  padding: 0.8rem;
+}
+
+.gruposTextForm button{
+  margin: 0.8rem;
+  width: 40%;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  outline: none;
+  background-color: #b48e14;
+  border-radius: 12px;
+  color: aliceblue;
+}
+
+.soporteForm{
+  width: 100%;
+  text-align: center;
+}
+.creditosForm{
+  width: 100%;
+  text-align: center;
+  color: rgb(161, 161, 161);
 }
