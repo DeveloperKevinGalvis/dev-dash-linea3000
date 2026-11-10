@@ -28,10 +28,12 @@ const LoginPage = () => {
 
       if(data.success){
         console.log("LOGIN EXITOSO", data.user)
-        // Aquí puedes guardar los datos del usuario en localStorage y redirigir al Dashboard
+          //GUARDAMOS SESSION
+          localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
           setTimeout(() =>{
           setLoading(false);
-          alert("BIENVINIDO");
+          // Redirigir al usuario al Dashboard o panel principal
+          window.location.href = '/dashboard';
           }, 15000);
       }else{
         setLoading(false);
@@ -58,7 +60,7 @@ const LoginPage = () => {
           </figure>
           {/* LOGIN CONTENEDOR FORMULARIO */}
           <div className={LoginCss.contianerForm}>
-            <form action="" className={LoginCss.formLogin}>
+            <form onSubmit={handleLogin} className={LoginCss.formLogin}>
               <figure className={LoginCss.logoForm}>
                 <img src={LogoTemporal} alt="LogoHeimCore" />
                 <img src={LogoAerocivil} alt="LogoHeimCore" />
@@ -66,14 +68,24 @@ const LoginPage = () => {
               <div className={LoginCss.containerTextForm}>
                 <div className={LoginCss.gruposTextForm}>
                   <h2>Usuario</h2>
-                  <input type="text" placeholder="Ingrese Usuario" />
+                  <input type="text"
+                    placeholder="Ingrese Usuario"
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)}
+                    required
+                     />
                 </div>
                 <div className={LoginCss.gruposTextForm}>
                   <h2>Contraseña</h2>
-                  <input type="text" placeholder="Ingrese Contraseña" />
+                  <input type="text" 
+                    placeholder="Ingrese Contraseña"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required 
+                    />
                 </div>
                 <div className={LoginCss.gruposTextForm}>
-                  <button>Acceder</button>
+                  <button type="submit">Acceder</button>
                 </div>
                 <div className={LoginCss.soporteForm}>
                   <p>¿No tiene usuario?</p>
@@ -92,6 +104,7 @@ const LoginPage = () => {
           </div>
         </article>
       </section>
+      {loading && <ModalLogin />}
 
     </>
   );

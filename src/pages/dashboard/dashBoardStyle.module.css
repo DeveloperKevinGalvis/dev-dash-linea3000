@@ -1,0 +1,17 @@
+.containerSection{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    
+}
+
+.containerMaps{
+    width: 35%;
+    height: 80%;
+    
+}
+
+.containerTiempo{
+    width: 25%;
+    height: auto;
+}
