@@ -7,6 +7,7 @@ import MapsCss from "./mapsStyle.module.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import ModalInicioTurno from '../modals/modalIniciarTurno';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -23,7 +24,7 @@ const ChangeView = ({ center, zoom }) => {
     return null;
 };
 
-const MapsDashBoard = ({ onIniciarTurno }) => {
+const MapsDashBoard = ({ turnoIniciado, onToggleTurno }) => {
     const sedes = [
         { id: 1, nombre: 'NEA Aeronáutica Civil', coords: [4.68944, -74.13333], radio: 200 },
         { id: 2, nombre: 'CEA Centro de Estudios Aeronáuticos', coords: [4.69070, -74.13397], radio: 200 },
@@ -89,6 +90,9 @@ const MapsDashBoard = ({ onIniciarTurno }) => {
 
     const estaEnRangoDeSedeSeleccionada = sedeSeleccionada && sedeCercanaId === sedeSeleccionada.id;
     const sedeActualObj = sedes.find(s => s.id === sedeCercanaId);
+
+    // El botón se deshabilita si no ha iniciado turno y NO está en rango de la sede seleccionada
+    const botonDeshabilitado = !turnoIniciado && !estaEnRangoDeSedeSeleccionada;
 
     return (
         <div className={MapsCss.containerFormMaps}>
@@ -183,25 +187,26 @@ const MapsDashBoard = ({ onIniciarTurno }) => {
 
             <div className={MapsCss.containerButtonMaps} style={{ marginTop: '15px', textAlign: 'center' }}>
                 <button 
-                    disabled={!estaEnRangoDeSedeSeleccionada}
-                    onClick={() => {
-                        if (onIniciarTurno) onIniciarTurno();
-                    }}
+                    disabled={botonDeshabilitado}
+                    onClick={onToggleTurno}
                     style={{
                         padding: '10px 20px',
                         fontWeight: 'bold',
                         borderRadius: '6px',
-                        cursor: estaEnRangoDeSedeSeleccionada ? 'pointer' : 'not-allowed',
-                        backgroundColor: estaEnRangoDeSedeSeleccionada ? '#198754' : '#6c757d',
+                        cursor: botonDeshabilitado ? 'not-allowed' : 'pointer',
+                        // Cambia a rojo si el turno está activo (Finalizar), verde si está inactivo y en rango (Iniciar)
+                        backgroundColor: turnoIniciado ? '#dc3545' : (estaEnRangoDeSedeSeleccionada ? '#198754' : '#6c757d'),
                         color: '#fff',
                         border: 'none',
-                        opacity: estaEnRangoDeSedeSeleccionada ? 1 : 0.65
+                        opacity: botonDeshabilitado ? 0.65 : 1
                     }}
                 >
-                    Iniciar Turno
+                    {turnoIniciado ? 'Finalizar Turno' : 'Iniciar Turno'}
                 </button>
             </div>
+            <ModalInicioTurno />
         </div>
+        
     );
 };
 

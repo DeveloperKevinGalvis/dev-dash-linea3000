@@ -4,6 +4,7 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 import DashBoard from './pages/dashboard/DashBoard';
 import LoginPage from './pages/login/LoginPage';
+import CrearUsuario from './pages/crearUsuario/CrearUsuario';
 
 const App = () => {
   const usuarioLogueado = localStorage.getItem('usuarioLogueado');
@@ -21,6 +22,7 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashBoard />} />
           {/* Aquí puedes agregar más páginas protegidas en el futuro y todas tendrán la barra */}
+          <Route path="/crear" element={<CrearUsuario />} />
         </Route>
 
         {/* Ruta comodín */}

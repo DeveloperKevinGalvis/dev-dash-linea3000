@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import BarraNavegacion from '../barraNavegacion/BarraNavegacion'; // Ajusta la ruta según tu estructura
+import BarraNavegacion from '../barraNavegacion/BarraNavegacion';
 
 const ProtectedRoute = () => {
     const usuario = localStorage.getItem('usuarioLogueado');
+    // Creamos el estado global de la sesión aquí para compartirlo
+    const [estadoActual, setEstadoActual] = useState('disponible');
 
-    // Si no hay usuario, lo saca al login
     if (!usuario) {
         return <Navigate to="/" replace />;
     }
 
-    // Si SÍ hay usuario, muestra la barra de navegación arriba y la página protegida correspondiente abajo (<Outlet />)
     return (
         <>
-            <BarraNavegacion />
-            <Outlet />
+            {/* Le pasamos el estado actual a la barra */}
+            <BarraNavegacion estadoActual={estadoActual} />
+            {/* Compartimos el estado y la función para modificarlo a las páginas hijas (<Outlet>) */}
+            <Outlet context={{ estadoActual, setEstadoActual }} />
         </>
     );
-}
+};
 
 export default ProtectedRoute;

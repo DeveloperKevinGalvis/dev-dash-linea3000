@@ -35,3 +35,21 @@
     font-weight: 400;
     font-size: 0.8rem;
 }
+
+.barraTitulos{
+    width: 45%;
+    height: 100%;
+    display: flex;
+
+    align-items: center;
+}
+
+.Estado{
+    background-color: green;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+}
